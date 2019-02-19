@@ -4,11 +4,14 @@
 import socket
 import sys
 import json
+
 if len(sys.argv) != 3:
     print("ERR: bad params", file = sys.stderr)
     sys.exit()
+
 api_key = sys.argv[1]
 location = sys.argv[2]
+
 hostname = "api.openweathermap.org"
 port = 80 #http
 url_string = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + api_key + "&units=metric"
@@ -22,6 +25,7 @@ try:
 except socket.error:
     print("ERROR: problem with socket", file = sys.stderr)
     sys.exit()
+
 data_string = data.decode("utf-8") #decode from bytes to string
 win_deg = data_string.find("deg") # we find deg in our string when deg is not found result is -1 when is found result is 0
 if(data_string.find("HTTP/1.1 200 OK") == -1):
@@ -31,6 +35,7 @@ if(data_string.find("HTTP/1.1 200 OK") == -1):
     if(data_string.find("HTTP/1.1 404 Not Found") == 0):
         print("Code : 404 Not Found, non existing city", file = sys.stderr)
     sys.exit()
+    
 data_split = data_string.split("POST\r\n\r\n")[1] #split http info because we want just json data
 try:
     jsondata = json.loads(data_split)
