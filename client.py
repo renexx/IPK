@@ -17,7 +17,7 @@ port = 80 #http
 url_string = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + api_key + "&units=metric"
 request_command = "GET " + url_string + " HTTP/1.1\n" + "Host: " + hostname + "\n\n"
 try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # AF_INET type of connection,  sock_stream is  TCP/IP
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # AF_INET is IPv4,  sock_stream is  TCP/IP
     s.connect((hostname,port)) #connect to server
     s.send(request_command.encode("utf-8"))#send request to server
     data = s.recv(4096) #size of buffer
@@ -35,7 +35,7 @@ if(data_string.find("HTTP/1.1 200 OK") == -1):
     if(data_string.find("HTTP/1.1 404 Not Found") == 0):
         print("Code : 404 Not Found, non existing city", file = sys.stderr)
     sys.exit()
-    
+
 data_split = data_string.split("POST\r\n\r\n")[1] #split http info because we want just json data
 try:
     jsondata = json.loads(data_split)
