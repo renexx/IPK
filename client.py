@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # author : René Bolf xbolf@stud.fit.vutbr.cz
+# IPK projekt http client openweathermap api
 import socket
 import sys
 import json
