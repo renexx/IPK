@@ -37,19 +37,15 @@ if(data_string.find("HTTP/1.1 200 OK") == -1):
     sys.exit()
 
 data_split = data_string.split("POST\r\n\r\n")[1] #split http info because we want just json data
-try:
-    jsondata = json.loads(data_split)
-    print ("\ncity:",jsondata["name"],",",jsondata["sys"]["country"])
-    for weather in jsondata["weather"]:
-        print("weather:",weather["description"])
-    print ("temperature:",jsondata["main"]["temp"],"°C")
-    print ("humidity:",jsondata["main"]["humidity"],"%")
-    print ("pressure:",jsondata["main"]["pressure"],"hPa")
-    print ("wind-speed:",jsondata["wind"]["speed"],"m/s")
-    if(win_deg == -1): #when result is -1 deg is not found , we set wind-deg to -
-        print ("wind-deg: -")
-    else:
-        print ("wind-deg:",jsondata["wind"]["deg"])
-except jsonError:
-    print("ERROR: problem with json", file = sys.stderr)
-    sys.exit()
+jsondata = json.loads(data_split)
+print ("\ncity:",jsondata["name"],",",jsondata["sys"]["country"])
+for weather in jsondata["weather"]:
+    print("weather:",weather["description"])
+print ("temperature:",jsondata["main"]["temp"],"°C")
+print ("humidity:",jsondata["main"]["humidity"],"%")
+print ("pressure:",jsondata["main"]["pressure"],"hPa")
+print ("wind-speed:",jsondata["wind"]["speed"],"m/s")
+if(win_deg == -1): #when result is -1 deg is not found , we set wind-deg to -
+    print ("wind-deg: -")
+else:
+    print ("wind-deg:",jsondata["wind"]["deg"])
