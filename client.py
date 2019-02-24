@@ -38,14 +38,14 @@ if(data_string.find("HTTP/1.1 200 OK") == -1):
 
 data_split = data_string.split("POST\r\n\r\n")[1] #split http info because we want just json data
 jsondata = json.loads(data_split)
-print ("\ncity:",jsondata["name"],",",jsondata["sys"]["country"])
+print ("\ncity:\t\t",jsondata["name"],",",jsondata["sys"]["country"])
 for weather in jsondata["weather"]:
-    print("weather:",weather["description"])
-print ("temperature:",jsondata["main"]["temp"],"°C")
-print ("humidity:",jsondata["main"]["humidity"],"%")
-print ("pressure:",jsondata["main"]["pressure"],"hPa")
-print ("wind-speed:",jsondata["wind"]["speed"],"m/s")
+    print("weather:\t",weather["description"])
+print ("temperature:\t",jsondata["main"]["temp"],"°C")
+print ("humidity:\t",jsondata["main"]["humidity"],"%")
+print ("pressure:\t",jsondata["main"]["pressure"],"hPa")
+print ("wind-speed:\t",jsondata["wind"]["speed"],"m/s")
 if(win_deg == -1): #when result is -1 deg is not found , we set wind-deg to -
-    print ("wind-deg: -")
+    print ("wind-deg:\t -")
 else:
-    print ("wind-deg:",jsondata["wind"]["deg"])
+    print ("wind-deg:\t",jsondata["wind"]["deg"])
