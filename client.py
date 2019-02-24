@@ -38,7 +38,7 @@ if(data_string.find("HTTP/1.1 200 OK") == -1):
 
 data_split = data_string.split("POST\r\n\r\n")[1] #split http info because we want just json data
 jsondata = json.loads(data_split)
-print ("\ncity:\t\t",jsondata["name"],",",jsondata["sys"]["country"])
+print ("city:\t\t",jsondata["name"],",",jsondata["sys"]["country"])
 for weather in jsondata["weather"]:
     print("weather:\t",weather["description"])
 print ("temperature:\t",jsondata["main"]["temp"],"°C")
