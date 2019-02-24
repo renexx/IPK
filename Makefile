@@ -1,2 +1,2 @@
 run:
-	python3 client.py ${api_key} "${city}"
+	@python3 client.py ${api_key} "${city}" #zamlcanie
