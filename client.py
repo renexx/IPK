@@ -29,11 +29,12 @@ except socket.error:
 data_string = data.decode("utf-8") #decode from bytes to string
 win_deg = data_string.find("deg") # we find deg in our string when deg is not found result is -1 when is found result is 0
 if(data_string.find("HTTP/1.1 200 OK") == -1):
-    print("ERROR: bad response ", file = sys.stderr)
     if(data_string.find("HTTP/1.1 401 Unauthorized") == 0):
         print("Code : 401 Unauthorized, non existing API_KEY", file = sys.stderr)
-    if(data_string.find("HTTP/1.1 404 Not Found") == 0):
+    elif(data_string.find("HTTP/1.1 404 Not Found") == 0):
         print("Code : 404 Not Found, non existing city", file = sys.stderr)
+    else:
+        print("ERROR: bad response ", file = sys.stderr)
     sys.exit()
 
 data_split = data_string.split("POST\r\n\r\n")[1] #split http info because we want just json data
