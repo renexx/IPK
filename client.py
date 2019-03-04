@@ -43,6 +43,8 @@ print ("city:\t\t",jsondata["name"],",",jsondata["sys"]["country"])
 for weather in jsondata["weather"]:
     print("weather:\t",weather["description"])
 print ("temperature:\t",jsondata["main"]["temp"],"°C")
+print ("temperature-min:",jsondata["main"]["temp_min"],"°C")
+print ("temperature-max:",jsondata["main"]["temp_max"],"°C")
 print ("humidity:\t",jsondata["main"]["humidity"],"%")
 print ("pressure:\t",jsondata["main"]["pressure"],"hPa")
 print ("wind-speed:\t",jsondata["wind"]["speed"],"m/s")
