@@ -34,7 +34,7 @@ if(data_string.find("HTTP/1.1 200 OK") == -1):
     elif(data_string.find("HTTP/1.1 404 Not Found") == 0):
         print("Code : 404 Not Found, non existing city", file = sys.stderr)
     else:
-        print("ERROR: bad response ", file = sys.stderr)
+        print("CODE :",data_string[8:12], file = sys.stderr)
     sys.exit()
 
 data_split = data_string.split("POST\r\n\r\n")[1] #split http info because we want just json data
