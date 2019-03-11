@@ -20,14 +20,16 @@ try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # AF_INET is IPv4,  sock_stream is  TCP/IP
     s.connect((hostname,port)) #connect to server
     s.send(request_command.encode("utf-8"))#send request to server
-    data = s.recv(4096) #size of buffer
+    data = s.recv(4096) #4096 size of buffer, Receive data from the socket. The return value is a bytes object representing the data received.
     s.close() #close connection
 except socket.error:
     print("ERROR: problem with socket", file = sys.stderr)
     sys.exit()
 
 data_string = data.decode("utf-8") #decode from bytes to string
+print(data_string)
 win_deg = data_string.find("deg") # we find deg in our string when deg is not found result is -1 when is found result is 0
+rain = data_string.find("rain") 
 if(data_string.find("HTTP/1.1 200 OK") == -1):
     if(data_string.find("HTTP/1.1 401 Unauthorized") == 0):
         print("Code : 401 Unauthorized, non existing API_KEY", file = sys.stderr)
@@ -52,3 +54,7 @@ if(win_deg == -1): #when result is -1 deg is not found , we set wind-deg to -
     print ("wind-deg:\t -")
 else:
     print ("wind-deg:\t",jsondata["wind"]["deg"])
+if(rain == -1):
+    print("")    
+else:
+    print("rain:\t\t",jsondata["rain"]["1h"],"mm for the last 1 hour")
