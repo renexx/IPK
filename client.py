@@ -27,9 +27,7 @@ except socket.error:
     sys.exit()
 
 data_string = data.decode("utf-8") #decode from bytes to string
-print(data_string)
 win_deg = data_string.find("deg") # we find deg in our string when deg is not found result is -1 when is found result is 0
-rain = data_string.find("rain") 
 if(data_string.find("HTTP/1.1 200 OK") == -1):
     if(data_string.find("HTTP/1.1 401 Unauthorized") == 0):
         print("Code : 401 Unauthorized, non existing API_KEY", file = sys.stderr)
@@ -54,7 +52,3 @@ if(win_deg == -1): #when result is -1 deg is not found , we set wind-deg to -
     print ("wind-deg:\t -")
 else:
     print ("wind-deg:\t",jsondata["wind"]["deg"])
-if(rain == -1):
-    print("")    
-else:
-    print("rain:\t\t",jsondata["rain"]["1h"],"mm for the last 1 hour")
